@@ -1,0 +1,63 @@
+#ifndef FONCTION_H
+#define FONCTION_H
+#define MAX 100
+#define INFINITY 1000
+#define SABLE 4
+#define ROUTE 2
+#define ARRIVE 1
+#define PORTE 3
+#define DEPART 0
+
+#include <stdlib.h>
+#include <stdio.h>
+#include "Liste/listeA.h"
+#include "pile/pile.h"
+#include "struct.h"
+
+
+typedef struct _Circuit
+{
+	short tab[100*100];
+	short map[MAX][MAX];
+	short possibilite[5][5];
+	short tx;
+	short ty;
+	short taille;
+	Action action;
+	Position positionCourante;
+	//short shortPath[100*100];
+	Position arrivee;
+	Position depart;
+	ListeA *la;
+
+}Circuit;
+
+void poidsDistance(Circuit *pilote);
+void circuitCopie(short from[][MAX], short to[][MAX]);
+ListeA *creerListeA(Circuit pilote);
+
+/*Utilisé pour rapidité, principalement pour faire la listeA, seul probleme tres peu sécurisé*/
+int positionG(Circuit pilote, int pos);
+int positionD(Circuit pilote, int pos);
+int positionH(Circuit pilote, int pos);
+int positionB(Circuit pilote, int pos);
+int positionHG(Circuit pilote, int pos);
+int positionHD(Circuit pilote, int pos);
+int positionBG(Circuit pilote, int pos);
+int positionBD(Circuit pilote, int pos);
+
+Position position_haut(Position pos,int tailley);
+Position position_droite(Position pos,int taillex);
+Position position_bas(Position pos,int tailley);
+Position position_gauche(Position pos,int taillex);
+Position position_hautGauche(Position pos,int taillex,int tailley);
+Position position_hautDroite(Position pos,int taillex,int tailley);
+Position position_basGauche(Position pos,int taillex,int tailley);
+Position position_basDroite(Position pos,int taillex,int tailley);
+int testPosition(Position pos);
+
+void positionAutour(Position current, Circuit pilote);
+void autourPosition(Position current,Vitesse vit,int taillex,int tailley,short map[][MAX],int boost, Position autour[6][6],int valeur[6][6]);
+Action *shortCut(Circuit pilote);
+
+#endif
