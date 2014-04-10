@@ -10,29 +10,30 @@ void poidsDistance(Circuit *pilote)
 		for(int j = 0; j < pilote->tx ; j++){
 			val = pilote->map[i][j];
 			if(val=='#'){
+				//	pilote->tab[i*pilote->tx+j] = ROUTE;
 				pilote->map[i][j]=ROUTE;
 			}
 
 			if(val == '.'){
-				//pilote->tab[i*pilote->tx+j] = 1000;
+				//	pilote->tab[i*pilote->tx+j] = 1000;
 
 				pilote->map[i][j]=1000;
 			}
 			if(val == '='){
-				//pilote->tab[i*pilote->tx+j] = ARRIVE;
+				//	pilote->tab[i*pilote->tx+j] = ARRIVE;
 
 				pilote->map[i][j]=ARRIVE;
 				pilote->arrivee.y=i;
 				pilote->arrivee.x=j;
 			}
 			if(val == '~'){
-				pilote->tab[i*pilote->tx+j] = SABLE;
+				//	pilote->tab[i*pilote->tx+j] = SABLE;
 				pilote->map[i][j]=SABLE;
 
 			}
-		}
-			/*if( val == '2') {
-				pilote->tab[i*pilote->tx+j] = DEPART;
+
+			if( val == '2') {
+				//	pilote->tab[i*pilote->tx+j] = DEPART;
 				pilote->map[i][j]=DEPART;
 
 				pilote->depart.y=i;
@@ -40,8 +41,7 @@ void poidsDistance(Circuit *pilote)
 			}
 		}
 	//	printf("Avant: %d %d",pilote->arrivee.x,pilote->arrivee.y);
-	pilote->tab[pilote->depart.y*pilote->tx+pilote->depart.x]=0;
-	pilote->map[pilote->depart.y][pilote->depart.x]=0;*/
+	pilote->map[pilote->depart.y][pilote->depart.x]=0;
 }
 
 
@@ -123,6 +123,7 @@ int verif(Position tab[], Position pos)
 
 void autourPosition(Position current,Vitesse vit,int taillex,int tailley, short map[MAX][MAX],int boost,Position autour[6][6],int valeur[6][6])
 {
+	//	puts("Autour pos");
 	int b;
 	b=(boost)? 2:1;
 	Position suivant;
@@ -146,19 +147,19 @@ void autourPosition(Position current,Vitesse vit,int taillex,int tailley, short 
 			}
 		}
 	}
-/*	for(int i=0;i<3;i++){
+	/*	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
-			printf("(%d %d)",autour[i][j].x,autour[i][j].y);
+		printf("(%d %d)",autour[i][j].x,autour[i][j].y);
 		}
 		puts(" ");
-	}
+		}
 
-	for(int i=0;i<3;i++){
+		for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
-			printf("(%d)",valeur[i][j]);
+		printf("(%d)",valeur[i][j]);
 		}
 		puts(" ");
-	}*/
+		}*/
 }
 
 ListeA *creerListeA(Circuit pilote)
@@ -202,7 +203,7 @@ ListeA *creerListeA(Circuit pilote)
 int shortCut(Circuit pilote, Action action1[200])
 {
 	//Action *action1=malloc(sizeof(Action)*200);
-	Action *action2=malloc(sizeof(Action)*200);
+	Action action2[200];
 	Action possible[9];
 	possible[0].vx=1;
 	possible[0].vy=1;
@@ -231,6 +232,15 @@ int shortCut(Circuit pilote, Action action1[200])
 	possible[8].vx=-1;
 	possible[8].vy=0;
 
+	/*	for(int i=0;i<3;i++){
+		for(int j=0;j<3;j++){
+		possible[8-i*3+j].vx=-1+i;
+		possible[8-i*3+j].vy=-1+j;
+		printf(" %d %d\n",possible[8-i*3+j].vx,possible[8-i*3+j].vy);
+
+		}
+		}*/
+
 	//	possible[3].vx=0;
 	//	possible[3].vy=0;
 	Position autour[6][6];
@@ -239,7 +249,6 @@ int shortCut(Circuit pilote, Action action1[200])
 	Position current=pilote.depart;
 	Vitesse vCurrent;
 	vCurrent.vx=0;
-	vCurrent.vy=0;
 	vCurrent.vy=0;
 	Pile *pileA=creerPile();
 	int j=0;
@@ -258,17 +267,17 @@ int shortCut(Circuit pilote, Action action1[200])
 		autourPosition(current,vCurrent,pilote.tx,pilote.ty,pilote.map,0,autour,poids);
 
 
-	/*	puts("------------Avant------------------\n");
-		printf(" (%d %d)\n",current.x,current.y);
-		printf("Vitesse: %d %d\n",vCurrent.vx,vCurrent.vy);
-		printf("k: %d\n",k);
-		printf("Arrive %d %d\t depart %d %d \n",pilote.arrivee.x,pilote.arrivee.y,pilote.depart.x,pilote.depart.y);
-		printf("Flag: %d\n\n",trouver);*/
+		/*	puts("------------Avant------------------\n");
+			printf(" (%d %d)\n",current.x,current.y);
+			printf("Vitesse: %d %d\n",vCurrent.vx,vCurrent.vy);
+			printf("k: %d\n",k);
+			printf("Arrive %d %d\t depart %d %d \n",pilote.arrivee.x,pilote.arrivee.y,pilote.depart.x,pilote.depart.y);
+			printf("Flag: %d\n\n",trouver);*/
 
-	//	puts("-------------Avant-----------------\n");
+		//	puts("-------------Avant-----------------\n");
 		if(trouver)j=0;
 		trouver=0;
-	//	puts("************Recherche*************");
+		//	puts("************Recherche*************");
 		for(i=j+1;i<9;i++){
 
 			vitesseNulle=0;
@@ -287,11 +296,11 @@ int shortCut(Circuit pilote, Action action1[200])
 					&&  futur.y< pilote.ty
 					&& autour[possible[i].vy+1][possible[i].vx+1].x!=-1
 					&& !vitesseNulle
-					&& (poids[possible[i].vy+1][possible[i].vx+1]!=1000 && poids[possible[i].vy+1][possible[i].vx+1]!=4)
+					&& poids[possible[i].vy+1][possible[i].vx+1]!=1000 
 					&& ((vFutur.vx)*(vFutur.vx) +(vFutur.vy)*(vFutur.vy)) <=25
 					&&  (verifD(vFutur,pilote.mapD,autour[possible[i].vy+1][possible[i].vx+1],pilote.tx,pilote.ty) || isJumping(vFutur,futur,pilote.map))) {
 				trouver=1;
-			//	printf("Jump");
+				//	printf("Jump");
 				break;
 
 			}
@@ -300,8 +309,8 @@ int shortCut(Circuit pilote, Action action1[200])
 
 		}
 		j=i;
-	//	puts(" ");
-	//	puts("************Recherche*************");
+		//	puts(" ");
+		//	puts("************Recherche*************");
 
 		Act act;
 
@@ -310,10 +319,10 @@ int shortCut(Circuit pilote, Action action1[200])
 			act.action=possible[j];
 			vCurrent.vx+=act.action.vx;
 			vCurrent.vy+=act.action.vy;
-			//	puts("Choisi:");
 
-			//	printf(" (%d %d)\n",current.x,current.y);
-			//	printf("Vitesse: %d %d\n",vCurrent.vx,vCurrent.vy);
+			/*	printf(" (%d %d)\n",current.x,current.y);
+				printf("Vitesse: %d %d\n",vCurrent.vx,vCurrent.vy);
+				printf("Possible %d %d\n\n",possible[j].vx,possible[j].vy);*/
 			//	current=autour[possible[j].vy+1][possible[j].vx+1];
 			act.position=j;
 			act.preced=current;
@@ -323,19 +332,24 @@ int shortCut(Circuit pilote, Action action1[200])
 			current.y+=vCurrent.vy;
 			current.x+=vCurrent.vx;
 
-		//	puts("yop");
+			//	puts("yop");
 			nombreEmpiler++;
 			arriveP=1;
 			k++;
-			//	break;
 			if(k<arrive){
-				//printf("Le nombre est de %d et avant %d\n",k,arrive);
+				//	printf("Le nombre est de %d et avant %d\n",k,arrive);
+
+				for(int i=0;i<200;i++){
+					action2[i].vx=0;
+					action2[i].vy=0;
+
+				}
 				arrive=k;
-				for(int i=0;i<k;i++){
+				for(int i=0;i<k-1;i++){
 					action2[i]=action1[i];
 				}
 			}
-
+			//break;
 			for(int i=0;i<nombreEmpiler+1;i++){
 				act=depiler(pileA);
 				current=act.preced;
@@ -403,7 +417,7 @@ int shortCut(Circuit pilote, Action action1[200])
 
 	}while(!videPile(pileA));
 	if(arriveP){
-		for (int i = 0; i < arrive; i++) {
+		for (int i = 0; i < arrive-1; i++) {
 			action1[i]=action2[i];
 		}
 	}
@@ -412,6 +426,213 @@ int shortCut(Circuit pilote, Action action1[200])
 
 }
 
+int shortCutF(Circuit pilote, Action action[200]) {
+
+	Action possible[9]={{0,0}};
+	for(int i=0;i<3;i++){
+		for(int j=0;j<3;j++){
+			possible[8-i*3-j].vx=-1+i;
+			possible[8-i*3-j].vy=-1+j;
+
+		}
+	}
+
+	//	for(int i=0;i<9;i++)
+	//		printf("%d %d\n",possible[i].vx,possible[i].vy);
+
+	short view[MAX][MAX]={{0,0}};
+	Vitesse vView[MAX][MAX]={{{0,0}}};
+	Vitesse vCurrent={0,0};
+	Position current={0,0};
+	current=pilote.depart;
+	FileF *fi=creerFileF();
+	FileF *fileSauvegarde=creerFileF();
+	int poids[6][6]={{1000}};
+	Position autour[6][6]={{{-1,-1}}};
+
+	Action act={0,0};
+	ElementFile e={{0,0},{0,0},{0,0},0};
+	e.preced=current;
+	e.vitesse=vCurrent;
+	e.action=act;
+	e.generationP=0;
+	enfilerF(fi,e);
+	view[current.y][current.x]=1;
+	vView[current.y][current.x]=vCurrent;
+	int vitesseNulle=0;
+	int k=0;
+	int fini=0;
+	Position futur={0,0};
+	int gen=0;
+
+	while(pilote.map[current.y][current.x]!=1){
+
+		if(videFileF(fi)){
+			puts("File vide");
+				
+
+			return 0;
+
+		}
+		ElementFile a=defilerF(fi);
+		enfilerF(fileSauvegarde,a);
+		current.x=a.preced.x;
+		current.y=a.preced.y;
+		vCurrent=a.vitesse;
+		gen=a.generation;
+		autourPosition(current,vCurrent,pilote.tx,pilote.ty,pilote.map,0,autour,poids);
+		view[current.y][current.x]=1;
+		//	vView[current.y][current.x]=vCurrent;
+
+	//		printf("Current %d %d\n",current.x,current.y);
+
+		//	if( (current.x==3 && current.y==0))break;
+		//		printf("k: %d\n",k);	
+		int i=0;
+		k++;
+		for(i=0;i<9;i++){
+
+			vitesseNulle=0;
+			Vitesse vFutur={0,0};
+			vFutur.vx=possible[i].vx+vCurrent.vx;
+			vFutur.vy=possible[i].vy+vCurrent.vy;
+			futur.x=vFutur.vx+current.x;
+			futur.y=vFutur.vy+current.y;
+			//	printf(" Possible %d %d\n",possible[i].vx,possible[i].vy);
+			//	printf(" vFutur %d %d\n",vFutur.vx,vFutur.vy);
+			//	printf(" Futur %d %d\n",futur.x,futur.y);
+			//	printf(" i %d\n\n",i);
+			if((vCurrent.vx+possible[i].vx)==0 && (vCurrent.vy+possible[i].vy)==0 && k!=0) vitesseNulle=1;
+			//if(possible[i].vx==0 && possible[i].vy ==0 && vCurrent.vx==0 && vCurrent.vy==0 && i<8) i++;
+
+			if( futur.x < pilote.tx
+					&&  futur.y< pilote.ty
+					&& futur.x>=0
+					&& futur.y>=0
+					&& (vView[futur.y][futur.x].vx!=vFutur.vx || vView[futur.y][futur.x].vy!=vFutur.vy)
+					&& autour[possible[i].vy+1][possible[i].vx+1].x!=-1
+					&& view[futur.y][futur.x]==0
+					&& !vitesseNulle
+					&& poids[possible[i].vy+1][possible[i].vx+1]!=1000 
+					&& ((vFutur.vx)*(vFutur.vx) +(vFutur.vy)*(vFutur.vy)) <=25
+					/*	&&  (verifD(vFutur,pilote.mapD,autour[possible[i].vy+1][possible[i].vx+1],pilote.tx,pilote.ty) || isJumping(vFutur,futur,pilote.map))*/) {
+				ElementFile a;
+				a.action=possible[i];
+				a.preced=futur;
+				//	current=futur;
+				a.vitesse=vFutur;
+				a.generation=k+i;
+				a.generationP=gen;
+				vView[futur.y][futur.x]=vFutur;
+				enfilerF(fi,a);
+				//	view[futur.y][futur.x]=1;
+				if(pilote.map[futur.y][futur.x]==1) {
+					fini=1;
+					current=futur;
+					enfilerF(fileSauvegarde,a);
+					/*	puts("**********Enfiler*********");
+						printf("Futur %d %d \t%d %d\n",futur.x,futur.y,vFutur.vx,vFutur.vy);
+						puts("**********Enfiler*********");*/
+
+					break;
+				}
+				/*	puts("**********Enfiler*********");
+					printf("Futur %d %d \t%d %d\n",futur.x,futur.y,vFutur.vx,vFutur.vy);
+					puts("**********Enfiler*********");*/
+
+
+			}
+
+
+		}
+
+		k+=i;
+		if(fini){
+			break;
+
+		}
+
+
+	}
+	//	printf("Current %d %d\n",current.x,current.y);
+
+	return retrouverChemin(fileSauvegarde,action,current,pilote.depart,k);
+
+}
+
+int retrouverChemin(FileF *fileBackUp,Action action[200],Position final,Position depart,int taille){
+
+	ElementFile *tab=malloc(sizeof(ElementFile)*taille+5);
+	int i=0;
+	while(!videFileF(fileBackUp)){
+
+		tab[i]=defilerF(fileBackUp);
+		i++;
+	}
+/*	for(int j=0;j<i;j++){
+		printf("preced %d %d\n",tab[j].preced.x,tab[j].preced.y);
+		printf("vitesse %d %d\n",tab[j].vitesse.vx,tab[j].vitesse.vy);
+		printf("g %d %d\n\n",tab[j].generation,tab[j].generationP);
+
+	}*/
+//	return 0;
+//	Position preced=final;
+	//	printf(" Position final %d %d\t Position depart %d %d\n",final.x,final.y,depart.x,depart.y);
+	action[0]=tab[i-1].action;
+//	printf("action %d %d\n",action[0].vx,action[0].vy);
+	Vitesse vFinale=tab[i-1].vitesse;
+	int genF=tab[i-1].generation;
+	Vitesse vPreced=vFinale;
+	int gen=tab[i-1].generationP;
+	i=1;
+	int index=0;
+	while(1){
+		index=recherchePos(tab,gen,taille+1);
+		//	printf("index %d",index);
+
+		if(index!=-1) {
+
+			gen=tab[index].generationP;
+
+			action[i]=tab[index].action;
+		//	printf("i %d\t action %d %d\n",i,action[i].vx,action[i].vy);
+		//	printf("preced %d %d\n",preced.x,preced.y);
+		//	printf("vitesse %d %d\n",vPreced.vx,vPreced.vy);
+		//	printf("G GP %d %d\n",tab[index].generation,tab[index].generationP);
+
+
+			i++;
+		}
+		if(gen==0) break;
+
+	}
+
+//	for(int k=0;k<i;k++)
+//		printf("%d %d\n",action[k].vx,action[k].vy);
+
+
+	Action temp;
+	for(int k=0;k<(i/2);k++) {
+		temp=action[k];
+		action[k]=action[i-k-1];
+		action[i-k-1]=temp;
+
+	}
+	return i;
+}
+
+
+int recherchePos(ElementFile *tab,int generation,int taille){
+	for(int i=0;i<taille;i++){
+		if(tab[i].generation==generation){
+			return i;
+
+		}
+
+	}
+	return -1;
+
+}
 
 int isJumping(Vitesse vCurrent,Position current,short map[MAX][MAX]){
 
@@ -428,14 +649,14 @@ int isJumping(Vitesse vCurrent,Position current,short map[MAX][MAX]){
 		if(nbrCasesx>0){
 			before.x+=sensx;
 			if(map[before.y][before.x]==1000) return 1;
-	nbrCasesx--;
+			nbrCasesx--;
 
 		}
 
 		if(nbrCasesy>0){
 			before.y+=sensy;
 			if(map[before.y][before.x]==1000) return 1;
-nbrCasesy--;
+			nbrCasesy--;
 
 		}
 
@@ -631,9 +852,10 @@ void direction(Vitesse mapD[][MAX],short map[][MAX],Position *shortP,Vitesse *vP
 
 		if(map[pos[5].y][pos[5].x]==1000) {debutx=-decx;decx=0;}
 
-		if(map[pos[6].y][pos[6].x]==1000) {debuty=decy/2;decy=3*decy;}
+		//	if(map[pos[6].y][pos[6].x]==1000) {debuty=decy/2;decy=3*decy;}
 
-		if(map[pos[7].y][pos[7].x]==1000) {debuty=-decy;decy=0;}
+		//	if(map[pos[7].y][pos[7].x]==1000) {debuty=-decy;decy=0;}
+
 		if((map[pos[4].y][pos[4].x]==1000 && map[pos[5].y][pos[5].x]==1000) 
 				||(map[pos[6].y][pos[6].x]==1000 && map[pos[7].y][pos[7].x]==1000)){
 			mapD[current.y][current.x]=vCurrent;
@@ -689,28 +911,28 @@ int samePos(Position *shortP,Position current,int taille){
 
 int verifD(Vitesse current,Vitesse mapD[][MAX],Position pos,int taillex,int tailley){
 
-
-	if(pos.x > taillex || pos.y>tailley) return 0;
+	//	if(pos.x > taillex || pos.y>tailley) return 0;
 	//	printf("Pos: %d %d\n",pos.x,pos.y);
 	Vitesse ref=mapD[pos.y][pos.x];
-	//	printf("Ref: %d %d\n",ref.vx,ref.vy);
+	//	printf("Ref: %d %d",ref.vx,ref.vy);
 
 	if(ref.vx==0 && ref.vy==0) return 1;
 	if(current.vx==0 && current.vy==0) return 1;
 
-	float angleMax=0.6;
+	float angleMax=0.5;
 
-	if((ref.vx ==0 && ref.vy !=0) ||(ref.vx!=0 && ref.vy==0)) angleMax=0.9;
+	if((ref.vx ==0 && ref.vy !=0) ||(ref.vx!=0 && ref.vy==0)) angleMax=0.5;
 
 	float ps=current.vx*ref.vx+current.vy*ref.vy;
 	float normePs=(current.vx*current.vx+current.vy*current.vy)*(ref.vx*ref.vx+ref.vy*ref.vy);
 
-	float x=ps*ps/normePs;
-
-	/*	printf(" %d %d\n",ref.vx,ref.vy);
-		printf(" %d %d\n",current.vx,current.vy);
-		printf(" ps:%f\n",ps);
-		printf(" norme: %f\n",normePs);*/
+	float x=(ps*ps)/normePs;
+	/*puts("Norme");
+	  printf(" %d %d\n",ref.vx,ref.vy);
+	  printf(" %d %d\n",current.vx,current.vy);
+	  printf(" ps:%f\n",ps);
+	  printf(" norme: %f\n",normePs);
+	  puts("Norme\n");*/
 
 	if(ps<0) return 0;
 	if(x==1 && ps>0) return 1;

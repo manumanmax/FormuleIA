@@ -1,6 +1,6 @@
 #ifndef FONCTION_H
 #define FONCTION_H
-#define MAX 100
+#define MAX 150
 #define INFINITY 1000
 #define SABLE 4
 #define ROUTE 2
@@ -14,24 +14,16 @@
 #include "Liste/listeA.h"
 #include "pile/pile.h"
 #include "struct.h"
-
+#include "file/file.h"
 
 typedef struct _Circuit
 {
-	short tab[100*100];
-	short map[MAX][MAX];
-	Vitesse mapD[MAX][MAX];
+	char map[MAX][MAX];
 	short tx;
 	short ty;
 	short taille;
-	Action action;
-	Position positionCourante;
 	Position arrivee;
 	Position depart;
-	ListeA *la;
-	Position *shortPath;
-	int tailleChemin;
-	Vitesse *vPossible;
 
 }Circuit;
 
@@ -60,7 +52,7 @@ Position position_basDroite(Position pos,int taillex,int tailley);
 int testPosition(Position pos);
 
 void positionAutour(Position current, Circuit pilote);
-void autourPosition(Position current,Vitesse vit,int taillex,int tailley,short map[][MAX],int boost, Position autour[6][6],int valeur[6][6]);
+void autourPosition(Position current,Vitesse vit,int taillex,int tailley,char map[][MAX],int boost, Position autour[6][6],int valeur[6][6]);
 int shortCut(Circuit pilote, Action action[200]);
 Vitesse *vitessePossibles(Position *shortP, int taille);
 void direction(Vitesse mapD[][MAX],short map[][MAX],Position *shortP,Vitesse *vPos,int taille,int taillex,int tailley);
@@ -68,6 +60,8 @@ void perpendiculaire(int tab[],Vitesse pos);
 int samePos(Position *shortP,Position current,int taille);
 int verifD(Vitesse current,Vitesse mapD[][MAX],Position pos,int taillex,int tailley);
 int isJumping(Vitesse vCurrent,Position current,short map[MAX][MAX]);
-
+int shortCutF(Circuit pilote, Position depart,Vitesse vDepart, Action action[200]);
+int retrouverChemin(Pile *pileBackUp,Action action[200],int gen,int taille);
+int recherchePos(ElementFile *tab,int generation, int taille);
 
 #endif

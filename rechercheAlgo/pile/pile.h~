@@ -5,16 +5,12 @@
 #include <stdio.h>
 #include "../struct.h"
 
-typedef struct _Act
-{
-Action a;
-int k;
-}Act
+
 
 typedef struct _NoeudP
 {
 	struct _NoeudP *suivant;
-	Action a;
+	Act a;
 }NoeudP;
 
 typedef struct _Pile
@@ -25,8 +21,8 @@ typedef struct _Pile
 }Pile;
 
 int videPile(Pile *positionsPile);
-void empiler(Pile *positionsPile, Act b);
-Act depiler(Pile *positionsPile);
+void empiler(Pile *positionsPile, ElementFile b);
+ElementFile depiler(Pile *positionsPile);
 Pile *creerPile();
 
 #endif

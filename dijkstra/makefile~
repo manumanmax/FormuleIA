@@ -16,7 +16,7 @@ all: MyWaywardCar
 
 testManu: $(MANUBIN)testManu
 
-MyWaywardCar: $(BIN)test.o $(FONCTION)fonction.o $(FILEBIN)file.o $(PILE)pile.o $(FI)fi.o
+MyWaywardCar: $(BIN)test.o $(FONCTION)fonction.o $(LISTE)listeA.o $(FILEBIN)file.o $(BIN)dijkstra.o $(PILE)pile.o $(FI)fi.o
 	$(CC) -o $@ $^ 
 
 $(MANUBIN)testManu: $(BIN)test.o $(FONCTION)fonction.o $(LISTE)listeA.o $(FILEBIN)file.o $(BIN)dijkstra.o $(PILE)pile.o $(FI)fi.o
@@ -25,7 +25,13 @@ $(MANUBIN)testManu: $(BIN)test.o $(FONCTION)fonction.o $(LISTE)listeA.o $(FILEBI
 $(BIN)test.o: $(SRC)test.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
+$(BIN)dijkstra.o: $(SRC)dijkstra.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+	
 $(FONCTION)fonction.o: $(FONCTION)fonction.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+$(LISTE)listeA.o: $(LISTE)listeA.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 $(PILE)pile.o: $(PILE)pile.c

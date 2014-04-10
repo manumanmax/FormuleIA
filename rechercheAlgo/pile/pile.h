@@ -10,7 +10,7 @@
 typedef struct _NoeudP
 {
 	struct _NoeudP *suivant;
-	Act a;
+	ElementFile a;
 }NoeudP;
 
 typedef struct _Pile
@@ -21,8 +21,8 @@ typedef struct _Pile
 }Pile;
 
 int videPile(Pile *positionsPile);
-void empiler(Pile *positionsPile, Act b);
-Act depiler(Pile *positionsPile);
+void empiler(Pile *positionsPile, ElementFile b);
+ElementFile depiler(Pile *positionsPile);
 Pile *creerPile();
 
 #endif

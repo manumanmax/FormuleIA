@@ -29,7 +29,6 @@ typedef struct _ElementFile
 	Position preced;
 	Vitesse vitesse;
 	int generation;
-	int generationP;
 
 }ElementFile;
 
