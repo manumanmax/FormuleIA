@@ -11,8 +11,8 @@ int main(int argc, char** argv){
 
 	Circuit pilote;
 	Carte carte;
-
-	FILE *info = fopen("testlog.log","w");
+	int nbBoost = NBBOOST;
+	FILE *info = fopen("log.txt","w");
 	Position *posArrived=malloc(sizeof(Position)*20);
 	short *alreadyArrived=malloc(sizeof(int)*20);
 	short nombreArrivees=0;
@@ -91,7 +91,9 @@ int main(int argc, char** argv){
 	Vitesse vDepart;
 	vDepart.vx=0;
 	vDepart.vy=0;
-	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1);
+	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1,&nbBoost);
+		fprintf(info,"---tableau d'actions\n--------"); 
+		fprintf(info,"---tableau d'actions\n--------"); 
 	for(int i = 0; i < taille; i++){
 		fprintf(info,"%d %d\n", action1[i].vx, action1[i].vy); 
 	}
@@ -162,8 +164,8 @@ int main(int argc, char** argv){
 			|| (vCourante.vx==0 && vCourante.vy==0)) 
 		{
 
-			fprintf(info,"yop");
-			taille=shortCutF(pilote,carte,current,vCourante,action1);
+			fprintf(info,"yop\n");
+			taille=shortCutF(pilote,carte,current,vCourante,action1,&nbBoost);
 			posTab=0;
 
 			for(int i = 0; i < taille; i++){
@@ -181,7 +183,7 @@ int main(int argc, char** argv){
 			carte.map[pv1y][pv1x] = '.';
 
 
-			taille = shortCutF(pilote,carte,current,vCourante,action1);
+			taille = shortCutF(pilote,carte,current,vCourante,action1,&nbBoost);
 			for(int i = 0; i < taille; i++){
 				fprintf(info,"%d %d\n", action1[i].vx, action1[i].vy); 
 			}
@@ -200,7 +202,7 @@ int main(int argc, char** argv){
 		if(suivante.x == pv1x && suivante.y == pv1y && isPossible(current,vCourante,&carte,0) && !blockedBy1){
 			fprintf(info, "---------RECALCUL1------------\n");
 			carte.map[pv1y][pv1x] = '.';
-			taille = shortCutF(pilote,carte,current,vCourante,action1);
+			taille = shortCutF(pilote,carte,current,vCourante,action1, &nbBoost);
 			for(int i = 0; i < taille; i++){
 				fprintf(info,"%d %d\n", action1[i].vx, action1[i].vy); 
 			}
@@ -212,7 +214,7 @@ int main(int argc, char** argv){
 		if(suivante.x == pv3x && suivante.y == pv3y && isPossible(current,vCourante,&carte,0) && !blockedBy1){
 			fprintf(info, "---------RECALCUL2------------\n");
 			carte.map[pv3y][pv3x] = '.';
-			taille = shortCutF(pilote,carte,current,vCourante,action1);
+			taille = shortCutF(pilote,carte,current,vCourante,action1, &nbBoost);
 			for(int i = 0; i < taille; i++){
 				fprintf(info,"%d %d\n", action1[i].vx, action1[i].vy); 
 			}
@@ -230,7 +232,7 @@ int main(int argc, char** argv){
 		if(arrived  && isPossible(current,vCourante,&carte,0)){
 			fprintf(info, "---------Calcul car arrivée bouchée------------");
 
-			taille = shortCutF(pilote,carte,current,vCourante,action1);
+			taille = shortCutF(pilote,carte,current,vCourante,action1, &nbBoost);
 			fprintf(info,"taille %d\n",taille);
 
 			for(int i=0;i<taille;i++){

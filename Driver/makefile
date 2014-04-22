@@ -13,7 +13,7 @@ testManu: $(MANUBIN)testManu
 MyWaywardCar: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o
 	$(CC) -o $@ $^ 
 
-$(MANUBIN)testManu: $(BIN)test.o $(SRC)fonction.o $(LISTE)listeA.o $(FILEBIN)file.o $(BIN)dijkstra.o $(PILE)pile.o $(FI)fi.o
+$(MANUBIN)testManu: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o
 	$(CC) -o $@ $^ 
 
 $(BIN)test.o: $(SRC)test.c

@@ -1,7 +1,9 @@
 #ifndef FONCTION_H
 #define FONCTION_H
 #define MAX 200
-
+#define SIZEBOOST 25
+#define NBBOOST 2
+#define SIZEBIDIMTABLE 5
 #include <stdlib.h>
 #include <stdio.h>
 #include "../include/pile.h"
@@ -25,8 +27,8 @@ typedef struct _Carte
 
 }Carte;
 
-void autourPosition(Position current,Vitesse vit,Carte *carte,int boost, Position autour[6][6],int valeur[6][6]);
-int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Action *action);
+void autourPosition(Position current,Vitesse vit,Carte *carte,int boost, Position autour[SIZEBIDIMTABLE][SIZEBIDIMTABLE],int valeur[SIZEBIDIMTABLE][SIZEBIDIMTABLE]);
+int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Action *action,int *nbBoost);
 int retrouverChemin(Pile *pileBackUp,Action *action,int gen,int taille);
 int recherchePos(ElementFile *tab,int generation, int taille);
 int isArrived(Position *posArrived,short *alreadyArrived,int **map,Position pilot1,Position pilot2,int taille);
