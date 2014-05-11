@@ -30,6 +30,7 @@ typedef struct _ElementFile
 	Vitesse vitesse;
 	int generation;
 	int generationP;
+	int niveau;
 
 }ElementFile;
 

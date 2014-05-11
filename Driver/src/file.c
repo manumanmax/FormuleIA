@@ -14,12 +14,11 @@ FileF *creerFileF()
 
 void enfilerF(FileF *file,ElementFile val)
 {
+	CelluleF *cell=malloc(sizeof(CelluleF));
+	cell->val=val;
+
 	if(videFileF(file))
 	{
-
-		CelluleF *cell=malloc(sizeof(CelluleF));
-		cell->val=val;
-
 		file->tail=cell;
 		cell->suivant=file->head;
 		file->head=cell;
@@ -27,8 +26,6 @@ void enfilerF(FileF *file,ElementFile val)
 	}
 
 
-	CelluleF *cell=malloc(sizeof(CelluleF));
-	cell->val=val;
 	file->tail->suivant=cell;
 	file->tail=cell;
 
@@ -37,18 +34,18 @@ void enfilerF(FileF *file,ElementFile val)
 
 ElementFile defilerF(FileF *file)
 {
-ElementFile e;
+	ElementFile e;
 
 	if(videFileF(file))
 		return e;
-	
+
 	CelluleF *cell=file->head;
 	e=file->head->val;
 	file->head=cell->suivant;
 	free(cell);
 	cell=NULL;
-//	if(file->head->suivant==NULL)
-//		file->tail=NULL;
+	//	if(file->head->suivant==NULL)
+	//		file->tail=NULL;
 	return e;
 
 }
@@ -112,7 +109,7 @@ void concatenerF(FileF *f1, FileF *f2)
 void detruireFileF(FileF *file)
 {
 	if(videFileF(file))
-			return;
+		return;
 
 	while(!videFileF(file))
 	{

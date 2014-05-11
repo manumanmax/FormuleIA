@@ -1,6 +1,7 @@
 #include "../include/fonction.h"
 #include "../include/pile.h"
 #include "../include/struct.h"
+#include "../include/file.h"
 
 
 
@@ -56,7 +57,9 @@ void autourPosition(Position current,Vitesse vit,Carte *carte,int boost,Position
 
 int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Action *action, int* nbBoost){
 	//unsigned short tableSize = SIZEBOOST;
-	//FILE* f = fopen("log.txt","w+");
+	FILE* f = fopen("log.txt","a");
+	fprintf(f,"nombre de boosts : %d\n",*nbBoost);
+	fflush(f);
 	Action possible[SIZEBOOST]={{0,0}};
 	for(int i=0;i<SIZEBIDIMTABLE;i++){
 		for(int j=0;j<SIZEBIDIMTABLE;j++){
@@ -71,10 +74,11 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 	for(int i=0;i<MAX;i++){
 		view[i]=(char***)calloc(MAX,sizeof(char**));
 		for(int j=0;j<MAX;j++){
-			view[i][j]=(char **)calloc((SIZEBOOST+2),sizeof(char*));
-			for(int k=0;k<(SIZEBOOST+2);k++)
-				view[i][j][k]=calloc((SIZEBOOST+2),sizeof(char));
+			view[i][j]=(char **)calloc(11,sizeof(char*));
+			for(int k=0;k<11;k++)
+				view[i][j][k]=calloc(11,sizeof(char));
 		}
+
 	}
 	//fprintf(f,"table view set\n");
 	/*	char view[MAX][MAX][36]={{{0}}};
@@ -109,7 +113,7 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 	Position autour[SIZEBIDIMTABLE][SIZEBIDIMTABLE]={{{-1,-1}}};
 
 	Action act={0,0};
-	ElementFile e={{0,0},{0,0},{0,0},0};
+	ElementFile e={{0,0},{0,0},{0,0},0,0};
 	e.preced=current;
 	e.vitesse=vCurrent;
 	e.action=act;
@@ -118,13 +122,20 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 	int k=0;
 	int gen=0;
 	int fini=0;
-	
+	int niveau = 0;
+
 	//fprintf(f,"positioned before while\n");
 	while(carte.map[current.y][current.x]!='='){
 		ElementFile a;
 
 		if(!videFileF(fi)){
 			a=defilerF(fi);
+			if(a.niveau != niveau && *nbBoost > 0){
+				*nbBoost = *nbBoost - 1;
+				fprintf(f,"reduction des boosts a %d\n",*nbBoost);
+				niveau++;
+			}
+			//niveau++;
 		}
 
 		else {
@@ -139,20 +150,34 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 		vCurrent=a.vitesse;
 		gen=a.generation;
 
-		autourPosition(current,vCurrent,&carte,1,autour,poids);
+		if(*nbBoost >= 1){
+			autourPosition(current,vCurrent,&carte,1,autour,poids);
+		}
+		else{
+			autourPosition(current,vCurrent,&carte,0,autour,poids);
+		}
 		view[current.y][current.x][vCurrent.vx+5][vCurrent.vy+5]=1;
 		int i=0;
 		int nombreCasesEnfiles=0;
 		k++;
 		//TODO: definir une variable local pour boucler en fonction de si il reste des boosts
 		for(i=0;i<SIZEBOOST;i++){
- 
+
 			if((possible[i].vx > 1 || possible[i].vx < -1
-				|| possible[i].vy > 1 || possible[i].vy < -1)
-				&& *nbBoost <= 1){
+						|| possible[i].vy > 1 || possible[i].vy < -1)
+					&& *nbBoost < 1){
+				fprintf(f,"on passe la positon %d - %d\n",possible[i].vx, possible[i].vy);
+				fflush(f);
 				continue;
 			} //passe la position possible si c'est un boost et qu'il n'en reste plus
-
+			
+			if(!(possible[i].vx == 2 || possible[i].vx == -2 ||
+				possible[i].vy == 2 || possible[i].vy == -2)
+					&& *nbBoost > 0){
+				fprintf(f,"on passe la positon %d - %d car boost\n",possible[i].vx, possible[i].vy);
+				fflush(f);
+				continue;
+			}
 			Position futur={0,0};
 
 			Vitesse vFutur={0,0};
@@ -172,21 +197,20 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 					&& norme <=25){
 
 				if(view[futur.y][futur.x][vFutur.vx+5][vFutur.vy+5]==0){
-					ElementFile a;
 					a.action=possible[i];
 					a.preced=futur;
 					a.vitesse=vFutur;
 					a.generation=k+i;
 					a.generationP=gen;
+					a.niveau = niveau + 1;
+					//fprintf(f,"niveau de l'element %d : %d\n",a.generation,a.niveau);
 					vViewx[futur.y][futur.x][i]=vFutur.vx;
 					vViewy[futur.y][futur.x][i]=vFutur.vy;
 
 					view[futur.y][futur.x][vFutur.vx+5][vFutur.vy+5]=1;
+					fprintf(f,"acceleration %d - %d\n",a.vitesse.vx, a.vitesse.vy);
 					enfilerF(fi,a);
 					nombreCasesEnfiles++;
-					if(vFutur.vx > 1 || vFutur.vy > 1 || vFutur.vx < -1 || vFutur.vy < -1){
-						*nbBoost--;
-					}
 					if(carte.map[futur.y][futur.x]=='=') {
 						fini=1;
 						gen=k+i;
@@ -206,6 +230,8 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 	destruction(view);
 	//fprintf(f,"after destruction\n");
 
+	//fprintf(f,"reduction des boosts a %d\nnombre de cases enfilées : %d",*nbBoost,nombreCasesEnfiles);
+	fflush(f);
 	return retrouverChemin(pileSauvegarde,action,gen,k);
 }
 
@@ -265,7 +291,7 @@ void destruction(char ****tab){
 
 	for(int i=0;i<MAX;i++){
 		for(int j=0;j<MAX;j++){ 
-			for(int k=0;k<(SIZEBOOST+2);k++){
+			for(int k=0;k<11;k++){
 				free(tab[i][j][k]);
 			}
 			free(tab[i][j]);
