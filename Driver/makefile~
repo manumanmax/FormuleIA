@@ -8,12 +8,12 @@ CFLAGS=-Wall -std=c99 -pedantic -O3
 
 all: FatMobile
 
-testManu: $(MANUBIN)fatMobile
+testManu: $(MANUBIN)testManu
 
-FatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
+FatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o
 	$(CC) -o $@ $^ 
 
-$(MANUBIN)fatMobile: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o $(BIN)communication.o
+$(MANUBIN)testManu: $(BIN)test.o $(SRC)fonction.o $(LISTE)listeA.o $(FILEBIN)file.o $(BIN)dijkstra.o $(PILE)pile.o $(FI)fi.o
 	$(CC) -o $@ $^ 
 
 $(BIN)test.o: $(SRC)test.c
@@ -26,9 +26,6 @@ $(BIN)pile.o: $(SRC)pile.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 $(BIN)fi.o: $(SRC)file.c
-	$(CC) -o $@ -c $^ $(CFLAGS)
-
-$(BIN)communication.o: $(SRC)communication.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 

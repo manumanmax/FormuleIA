@@ -51,7 +51,7 @@ ElementFile e;
 	free(cell);
 	file->taille--;
 	cell=NULL;
-	if(file->head==NULL)
+	if(file->head->suivant==NULL)
 		file->tail=NULL;
 	return e;
 
