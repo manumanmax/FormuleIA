@@ -171,11 +171,21 @@ int main(int argc, char** argv){
 			//fprintf(info, "---------RECALCUL1------------\n");
 			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot1,&posTab);
 			//displayAction(action1,info,taille);
+			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
+					action1[posTab].vx == -2 || action1[posTab].vy == -2){
+				*nbBoost = *nbBoost + 1;
+			}
+
 			collision1=1;
 		}
 		if(suivante.x == pv3x && suivante.y == pv3y && isPossible(current,vCourante,&carte,0)){
 			//fprintf(info, "---------RECALCUL2------------\n");
 			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot2,&posTab);
+			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
+					action1[posTab].vx == -2 || action1[posTab].vy == -2){
+				*nbBoost = *nbBoost + 1;
+			}
+
 			collision2=1;
 
 		}
@@ -216,6 +226,10 @@ int main(int argc, char** argv){
 		fflush(stdout);
 
 		//Écriture synchrone de l'accélération.
+		if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
+				action1[posTab].vx == -2 || action1[posTab].vy == -2){
+			*nbBoost = *nbBoost - 1;
+		}
 		printf("%d %d\n",action1[posTab].vx,action1[posTab].vy);
 		fflush(stdout);
 		vVerif.vx += action1[posTab].vx;
