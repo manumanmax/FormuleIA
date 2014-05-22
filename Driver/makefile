@@ -6,11 +6,11 @@ MANUBIN=~/Bureau/GrandPrix/drivers/
 
 CFLAGS=-Wall -std=c99 -pedantic -O3
 
-all: FatMobile
+all: fatMobile
 
 testManu: $(MANUBIN)fatMobile
 
-FatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
+fatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
 	$(CC) -o $@ $^ 
 
 $(MANUBIN)fatMobile: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o $(BIN)communication.o

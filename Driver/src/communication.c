@@ -1,12 +1,11 @@
 #include "../include/communication.h"
 
 
-int calculBecauseCollision(Circuit pilote,Carte map,Position current,Vitesse vCurrent,Action *action1, Position pilote1,int *posTab){
+int calculBecauseCollision(Circuit pilote,Carte map,Position current,Vitesse vCurrent,Action *action1, Position pilote1,int *posTab,int *nbBoost){
 
 	int taille=0;
-	int nbBoost = 0;
 	map.map[pilote1.y][pilote1.x] = '.';
-	taille = shortCutF(pilote,map,current,vCurrent,action1, &nbBoost);
+	taille = shortCutF(pilote,map,current,vCurrent,action1, nbBoost);
 
 	map.map[pilote1.y][pilote1.x] = map.mapCopie[pilote1.y][pilote1.x];
 	if(taille>=1)

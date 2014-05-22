@@ -6,14 +6,14 @@ MANUBIN=~/Bureau/GrandPrix/drivers/
 
 CFLAGS=-Wall -std=c99 -pedantic -O3
 
-all: FatMobile
+all: fatMobile
 
-testManu: $(MANUBIN)testManu
+testManu: $(MANUBIN)fatMobile
 
-FatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o
+FatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
 	$(CC) -o $@ $^ 
 
-$(MANUBIN)testManu: $(BIN)test.o $(SRC)fonction.o $(LISTE)listeA.o $(FILEBIN)file.o $(BIN)dijkstra.o $(PILE)pile.o $(FI)fi.o
+$(MANUBIN)fatMobile: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o $(BIN)communication.o
 	$(CC) -o $@ $^ 
 
 $(BIN)test.o: $(SRC)test.c
@@ -26,6 +26,9 @@ $(BIN)pile.o: $(SRC)pile.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 $(BIN)fi.o: $(SRC)file.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+$(BIN)communication.o: $(SRC)communication.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 

@@ -12,13 +12,12 @@ int main(int argc, char** argv){
 	Circuit pilote;
 	Carte carte;
 
-//	FILE *info = fopen("testlog.log","w");
+	FILE *info = fopen("testlog.log","w");
 
 
 	short nombreArrivees=0;
 	char c;
-	int *nbBoost = malloc(sizeof(int));
-	*nbBoost = NBBOOST;
+	int nbBoost = NBBOOST;
 	
 
 	fscanf(stdin,"%hd %hd",&carte.tx,&carte.ty);
@@ -95,8 +94,8 @@ int main(int argc, char** argv){
 
 	Action *action1=malloc(sizeof(Action)*200);
 	Vitesse vDepart={0,0};
-	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1,nbBoost);
-	//displayAction(action1,info,taille);
+	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1,&nbBoost);
+	displayAction(action1,info,taille);
 
 	int tour = 0;
 	int posTab = 0;
@@ -115,7 +114,7 @@ int main(int argc, char** argv){
 		preced.y=py;
 		collision1=0;
 		collision2=0;
-		//fprintf(info,"\n === Tour %d === \n", tour);
+		fprintf(info,"\n === Tour %d === \n", tour);
 		if(!flagPosDepartSet){
 			fscanf(stdin,"%d %d\t%d %d\t%d %d",&px, &py, &pv1x, &pv1y, &pv3x, &pv3y);
 			fflush(stdin);
@@ -153,12 +152,12 @@ int main(int argc, char** argv){
 				|| (vCourante.vx==0 && vCourante.vy==0)) {
 
 
-			taille=shortCutF(pilote,carte,current,vCourante,action1,nbBoost);
+			taille=shortCutF(pilote,carte,current,vCourante,action1,&nbBoost);
 
 			if(taille>=1)
 				posTab=0;
 
-			//displayAction(action1,info,taille);
+			displayAction(action1,info,taille);
 			vVerif=vCourante;
 
 
@@ -168,23 +167,24 @@ int main(int argc, char** argv){
 
 
 		if(suivante.x == pv1x && suivante.y == pv1y && isPossible(current,vCourante,&carte,0)){
-			//fprintf(info, "---------RECALCUL1------------\n");
-			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot1,&posTab);
-			//displayAction(action1,info,taille);
+			fprintf(info, "---------RECALCUL1------------\n");
+			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot1,&posTab,&nbBoost);
+			displayAction(action1,info,taille);
 			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
 					action1[posTab].vx == -2 || action1[posTab].vy == -2){
-				*nbBoost = *nbBoost + 1;
+				nbBoost = nbBoost + 1;
 			}
 
 			collision1=1;
 		}
 		if(suivante.x == pv3x && suivante.y == pv3y && isPossible(current,vCourante,&carte,0)){
-			//fprintf(info, "---------RECALCUL2------------\n");
-			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot2,&posTab);
+			fprintf(info, "---------RECALCUL2------------\n");
+			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot2,&posTab,&nbBoost);
 			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
 					action1[posTab].vx == -2 || action1[posTab].vy == -2){
-				*nbBoost = *nbBoost + 1;
+				nbBoost = nbBoost + 1;
 			}
+			displayAction(action1,info,taille);
 
 			collision2=1;
 
@@ -192,7 +192,7 @@ int main(int argc, char** argv){
 
 
 
-		//fprintf(info,"Vitesse %d %d\n",vCourante.vx,vCourante.vy);
+		fprintf(info,"Vitesse %d %d\n",vCourante.vx,vCourante.vy);
 
 
 
@@ -203,10 +203,10 @@ int main(int argc, char** argv){
 			if(collision2) carte.map[pilot2.y][pilot2.x]='.';
 
 
-			//fprintf(info, "---------Calcul car arrivée bouchée------------");
+			fprintf(info, "---------Calcul car arrivée bouchée------------");
 
-			taille = shortCutF(pilote,carte,current,vCourante,action1,nbBoost);
-			//displayAction(action1,info,taille);
+			taille = shortCutF(pilote,carte,current,vCourante,action1,&nbBoost);
+			displayAction(action1,info,taille);
 
 			if(carte.mapCopie[pilot1.y][pilot1.x]!='=')
 				carte.map[pilot1.y][pilot1.x]=carte.mapCopie[pilot1.y][pilot1.x];
@@ -222,19 +222,19 @@ int main(int argc, char** argv){
 		}
 
 
-		//fprintf(info,"\n === Action === \n");
+		fprintf(info,"\n === Action === \n");
 		fflush(stdout);
 
 		//Écriture synchrone de l'accélération.
 		if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
 				action1[posTab].vx == -2 || action1[posTab].vy == -2){
-			*nbBoost = *nbBoost - 1;
+			nbBoost = nbBoost - 1;
 		}
 		printf("%d %d\n",action1[posTab].vx,action1[posTab].vy);
 		fflush(stdout);
 		vVerif.vx += action1[posTab].vx;
 		vVerif.vy += action1[posTab].vy;
-		//fprintf(info, "%d %d", action1[posTab].vx,action1[posTab].vy);
+		fprintf(info, "%d %d\n", action1[posTab].vx,action1[posTab].vy);
 		//fflush(info);
 		posTab++;
 	}
