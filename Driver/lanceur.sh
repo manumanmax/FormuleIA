@@ -8,7 +8,7 @@
 make clean
 make
 if [ $1 == "g" ]; then
-cp FatMobile ~/GrandPrix/drivers
+cp fatMobile ~/GrandPrix/drivers
 cd ~/GrandPrix/
 ./GrandPrix
 fi

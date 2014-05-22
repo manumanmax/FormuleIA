@@ -11,11 +11,9 @@ int autourPosition(Position current,Vitesse vit,Carte *carte,int boost,Position 
 	Position suivant;
 	suivant.x=current.x+vit.vx;
 	suivant.y=current.y+vit.vy;
-	int max=3*b;
+	int max=(boost)?SIZEBIDIMTABLE:3;
 	int possible=0;
 
-	if(boost)
-		max = SIZEBIDIMTABLE;
 
 	for(int i=0;i<max;i++){
 		for(int j=0;j<max;j++){
@@ -60,9 +58,9 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 		return 0;
 	}
 	int nbBoost = *nBoost;
-	FILE* f = fopen("log.txt","a");
-	fprintf(f,"nombre de boosts : %d\n",nbBoost);
-	fflush(f);
+//	FILE* f = fopen("log.txt","a");
+//	fprintf(f,"nombre de boosts : %d\n",nbBoost);
+//	fflush(f);
 	Action possible[SIZEBOOST]={{0,0}};
 
 	for(int i=0;i<SIZEBIDIMTABLE;i++){
@@ -72,7 +70,7 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 		}
 	}
 
-	fprintf(f,"initialisation du tableau\n");
+//	fprintf(f,"initialisation du tableau\n");
 
 	char ****view=(char ****)calloc(carte.ty,sizeof(char***));
 	for(int i=0;i<carte.ty;i++){
@@ -85,7 +83,7 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 
 	}
 
-	fprintf(f,"initialisation du tableau view\n");
+//	fprintf(f,"initialisation du tableau view\n");
 
 	char vViewx[MAX][MAX][SIZEBOOST];
 	char vViewy[MAX][MAX][SIZEBOOST];
@@ -97,8 +95,8 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 				vViewy[i][j][k]=50;
 			}
 
-	fprintf(f,"initialisation du tableau vView\n");
-	fflush(f);
+//	fprintf(f,"initialisation du tableau vView\n");
+//	fflush(f);
 	Vitesse vCurrent=vDepart;
 	Position current=depart;
 	FileF *fi=creerFileF();
@@ -118,15 +116,17 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 	int fini=0;
 	int maxSpeed=ROUTE;
 	int niveau = 0;
+	int offset=1;
 	
 	while(carte.map[current.y][current.x]!='='){
 		ElementFile a;
+		offset=1;
 		if(!videFileF(fi)){
 			a=defilerF(fi);
 			if(a.niveau != niveau && nbBoost > 0){
 				nbBoost = nbBoost - 1;
-				fprintf(f,"reduction des boosts a %d\n",nbBoost);
-				fflush(f);
+//				fprintf(f,"reduction des boosts a %d\n",nbBoost);
+			//	fflush(f);
 				niveau++;
 			}
 		}
@@ -149,16 +149,18 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 		int p;
 		if(nbBoost >= 1){
 			p=autourPosition(current,vCurrent,&carte,1,autour,poids);
+			offset=2;
 		}
 		else{
 			p=autourPosition(current,vCurrent,&carte,0,autour,poids);
+			offset=1;
 		}
 		view[current.y][current.x][vCurrent.vx+5][vCurrent.vy+5]=1;
 		if(!p) continue;
 		int i=0;
 		int nombreCasesEnfiles=0;
 		k++;
-		
+
 		for(i=0;i<SIZEBOOST;i++){
 			if((possible[i].vx > 1 || possible[i].vx < -1
 						|| possible[i].vy > 1 || possible[i].vy < -1)
@@ -167,6 +169,8 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 				continue;
 			} //passe la position possible si c'est un boost et qu'il n'en reste plus
 
+			if(possible[i].vx > 1 || possible[i].vx < -1
+					|| possible[i].vy > 1 || possible[i].vy < -1) offset=2;
 			Position futur={0,0};
 
 			Vitesse vFutur={0,0};
@@ -182,12 +186,11 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 					&& futur.x>=0
 					&& futur.y>=0
 					&& (vViewx[futur.y][futur.x][i]!=vFutur.vx || vViewy[futur.y][futur.x][i]!=vFutur.vy)
-					&& autour[possible[i].vy+1][possible[i].vx+1].x!=-1
-					&& poids[possible[i].vy+1][possible[i].vx+1]!='.'
+					&& autour[possible[i].vy+offset][possible[i].vx+offset].x!=-1
+					&& poids[possible[i].vy+offset][possible[i].vx+offset]!='.'
 					&& norme <=maxSpeed){
 
 				if(view[futur.y][futur.x][vFutur.vx+5][vFutur.vy+5]==0){
-					//	ElementFile a;
 					a.action=possible[i];
 					a.preced=futur;
 					a.vitesse=vFutur;
@@ -200,7 +203,6 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 
 					view[futur.y][futur.x][vFutur.vx+5][vFutur.vy+5]=1;
 					//fprintf(f,"acceleration %d ajoutee\n",a.generation);
-					fflush(f);
 					enfilerF(fi,a);
 					nombreCasesEnfiles++;
 					if(carte.map[futur.y][futur.x]=='=') {
@@ -227,15 +229,15 @@ int shortCutF(Circuit pilote,Carte carte, Position depart,Vitesse vDepart, Actio
 
 
 	destruction(view,carte.tx,carte.ty);
-	
+
 	int taille = retrouverChemin(pileSauvegarde,action,gen,k);
 
-	fprintf(f,"taille du tableau : %d\n",taille);
+	//	fprintf(f,"taille du tableau : %d\n",taille);
 
-	for(int i = 0; i < taille; i++){
-		fprintf(f,"%d - %d\n",action[i].vx, action[i].vy);
-	}
-	fflush(f);
+	//	for(int i = 0; i < taille; i++){
+	//		fprintf(f,"%d - %d\n",action[i].vx, action[i].vy);
+	//	}
+	//	fflush(f);
 	return taille;
 	//return retrouverChemin(pileSauvegarde,action,gen,k);
 }
@@ -337,7 +339,7 @@ int isPossible(Position current,Vitesse vCurrent, Carte *carte,int boost){
 	Position suivant;
 	suivant.x=current.x+vCurrent.vx;
 	suivant.y=current.y+vCurrent.vy;
-	int max=3*b;
+	int max=(boost)? 5:3;
 
 	for(int i=0;i<max;i++){
 		for(int j=0;j<max;j++){
