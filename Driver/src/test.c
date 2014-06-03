@@ -13,16 +13,17 @@ int main(int argc, char** argv){
 	Carte carte;
 
 	FILE *info = fopen("testlog.log","w");
+	if(info==NULL) perror("probleme: ");
 
 
 	short nombreArrivees=0;
 	char c;
 	int nbBoost = NBBOOST;
-	
+	int carburant=0	;
 
-	fscanf(stdin,"%hd %hd",&carte.tx,&carte.ty);
+	fscanf(stdin,"%hd %hd %d",&carte.tx,&carte.ty,&carburant);
 
-	//fprintf(info,"taille %d x %d\n\n", carte.tx, carte.ty);
+	fprintf(info,"taille %d x %d\n\n", carte.tx, carte.ty);
 	int **tab=(int **)malloc(sizeof(int *)*carte.ty);
 	for(int i=0;i<carte.ty;i++)
 		tab[i]=malloc(sizeof(int)*carte.tx);
@@ -68,10 +69,10 @@ int main(int argc, char** argv){
 
 		}
 	}
-	//displayMap(carte,info);
+	displayMap(carte,info);
 
 	//fflush(info);
-	//fprintf(info,"\n === Debut Course === \n");
+	fprintf(info,"\n === Debut Course === \n");
 
 	//fflush(info);
 	int px;
@@ -92,7 +93,7 @@ int main(int argc, char** argv){
 	Position pilot1;
 	Position pilot2;
 
-	Action *action1=malloc(sizeof(Action)*200);
+	Action *action1=malloc(sizeof(Action)*400);
 	Vitesse vDepart={0,0};
 	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1,&nbBoost);
 	displayAction(action1,info,taille);
@@ -170,20 +171,12 @@ int main(int argc, char** argv){
 			fprintf(info, "---------RECALCUL1------------\n");
 			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot1,&posTab,&nbBoost);
 			displayAction(action1,info,taille);
-			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
-					action1[posTab].vx == -2 || action1[posTab].vy == -2){
-				nbBoost = nbBoost + 1;
-			}
 
 			collision1=1;
 		}
 		if(suivante.x == pv3x && suivante.y == pv3y && isPossible(current,vCourante,&carte,0)){
 			fprintf(info, "---------RECALCUL2------------\n");
 			taille=calculBecauseCollision(pilote,carte,current,vCourante,action1,pilot2,&posTab,&nbBoost);
-			if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
-					action1[posTab].vx == -2 || action1[posTab].vy == -2){
-				nbBoost = nbBoost + 1;
-			}
 			displayAction(action1,info,taille);
 
 			collision2=1;
@@ -221,15 +214,16 @@ int main(int argc, char** argv){
 
 		}
 
+		if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
+				action1[posTab].vx == -2 || action1[posTab].vy == -2){
+			nbBoost--;
+			fprintf(info,"Boost %d\n",nbBoost);
+		}
 
 		fprintf(info,"\n === Action === \n");
 		fflush(stdout);
 
 		//Écriture synchrone de l'accélération.
-		if(action1[posTab].vx == 2 || action1[posTab].vy == 2 ||
-				action1[posTab].vx == -2 || action1[posTab].vy == -2){
-			nbBoost = nbBoost - 1;
-		}
 		printf("%d %d\n",action1[posTab].vx,action1[posTab].vy);
 		fflush(stdout);
 		vVerif.vx += action1[posTab].vx;
