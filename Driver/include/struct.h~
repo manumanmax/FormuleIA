@@ -1,0 +1,17 @@
+#ifndef VITESSE_H
+#define VITESSE_H
+
+typedef struct _Action
+{
+	char vx;
+	char vy;
+}Action;
+typedef Action Vitesse;
+
+
+
+
+
+
+
+#endif

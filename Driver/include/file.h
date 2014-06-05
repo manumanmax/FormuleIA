@@ -1,6 +1,6 @@
 #ifndef FILE_H
 #define FILE_H
-#include "struct.h"
+#include "elementFile.h"
 
 
 typedef struct _Cellule

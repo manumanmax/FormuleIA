@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "struct.h"
+#include "elementFile.h"
 
 
 

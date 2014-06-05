@@ -1,7 +1,7 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
-
 #include "vitesse.h"
+
 #include "action.h"
 #include "position.h"
 #include "path.h"

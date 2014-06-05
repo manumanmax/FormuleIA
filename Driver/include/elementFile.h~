@@ -1,0 +1,16 @@
+#ifndef ELEMENT_FILE_H
+#define ELEMENT_FILE_H
+
+
+typedef struct _ElementFile
+{
+	Action action;
+	Position preced;
+	Vitesse vitesse;
+	int generation;
+	int generationP;
+	int niveau;
+
+}ElementFile;
+
+#endif

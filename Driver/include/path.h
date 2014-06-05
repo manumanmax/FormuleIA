@@ -1,5 +1,5 @@
-#ifndef FONCTION_H
-#define FONCTION_H
+#ifndef PATH_H
+#define PATH_H
 #define MAX 200
 #define ROUTE 25
 #define SAND 1
@@ -10,7 +10,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../include/pile.h"
-#include "struct.h"
+#include "vitesse.h"
+#include "action.h"
+#include "position.h"
+#include "elementFile.h"
+#include "act.h"
 #include "../include/file.h"
 
 typedef struct _Circuit

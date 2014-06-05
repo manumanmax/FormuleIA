@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "../include/fonction.h"
+#include "../include/path.h"
 #include "../include/communication.h"
 
 
@@ -19,9 +19,9 @@ int main(int argc, char** argv){
 	short nombreArrivees=0;
 	char c;
 	int nbBoost = NBBOOST;
-	int carburant=0	;
+//	int carburant=0	;
 
-	fscanf(stdin,"%hd %hd %d",&carte.tx,&carte.ty,&carburant);
+	fscanf(stdin,"%hd %hd",&carte.tx,&carte.ty/*,&carburant*/);
 
 	fprintf(info,"taille %d x %d\n\n", carte.tx, carte.ty);
 	int **tab=(int **)malloc(sizeof(int *)*carte.ty);
@@ -88,12 +88,11 @@ int main(int argc, char** argv){
 	pilote.depart.y = py;
 
 
-	//fflush(info);
 
 	Position pilot1;
 	Position pilot2;
 
-	Action *action1=malloc(sizeof(Action)*400);
+	Action *action1=malloc(sizeof(Action)*500);
 	Vitesse vDepart={0,0};
 	int taille = shortCutF(pilote,carte,pilote.depart,vDepart,action1,&nbBoost);
 	displayAction(action1,info,taille);
