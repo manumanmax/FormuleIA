@@ -268,17 +268,6 @@ int retrouverChemin(Pile *pileBackUp,Action *action,int gen,int taille){
 }
 
 
-int recherchePos(ElementFile *tab,int generation,int taille){
-	for(int i=0;i<taille;i++){
-		if(tab[i].generation==generation){
-			return i;
-
-		}
-
-	}
-	return -1;
-
-}
 
 int isArrived(Position *posArrived,short *alreadyArrived,int **map,Position pilot1,Position pilot2,int taille) {
 
