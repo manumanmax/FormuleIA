@@ -58,22 +58,6 @@ ElementFile e;
 }
 
 
-void affichageFileF(FileF *file)
-{
-	if(videFileF(file))
-		return;
-
-	CelluleF *cell=file->head;
-	do
-	{
-		printf("%d->",cell->val);
-		cell=cell->suivant;
-
-	}while(cell!=NULL);
-	puts("NULL");
-
-
-}
 
 int videFileF(FileF *file)
 {
@@ -97,21 +81,6 @@ int videFileF(FileF *file)
 
 }
 
-void concatenerF(FileF *f1, FileF *f2)
-{
-	if(videFileF(f2))
-		return;
-
-	if(videFileF(f1))
-	{f1=f2;}
-
-	f1->tail->suivant=f2->head;
-	f1->tail=f2->head;
-	f2->head=NULL;
-	f2->tail=NULL;
-
-
-}
 
 void detruireFileF(FileF *file)
 {
@@ -125,22 +94,3 @@ void detruireFileF(FileF *file)
 	free(file);
 }
 
-FileF *copieF(FileF *f)
-{
-	if(videFileF(f))
-		return NULL;
-
-	FileF *file=creerFileF();
-	CelluleF *tmp=f->head;
-
-	do
-	{
-
-		enfilerF(file,tmp->val);
-		tmp=tmp->suivant;
-
-	}while(tmp!=NULL);
-
-
-	return file;
-}
