@@ -1,0 +1,108 @@
+\hypertarget{pile_8h}{\section{include/pile.h File Reference}
+\label{pile_8h}\index{include/pile.\-h@{include/pile.\-h}}
+}
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}element\-File.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___noeud_p}{\-\_\-\-Noeud\-P}
+\item 
+struct \hyperlink{struct___pile}{\-\_\-\-Pile}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{pile_8h_a03523d108e2b5aa79d21a773e5dbbe77}{typedef struct \hyperlink{struct___noeud_p}{\-\_\-\-Noeud\-P} {\bfseries Noeud\-P}}\label{pile_8h_a03523d108e2b5aa79d21a773e5dbbe77}
+
+\item 
+\hypertarget{pile_8h_a5db05bfbcfc748953d86ad9d12c9e82c}{typedef struct \hyperlink{struct___pile}{\-\_\-\-Pile} {\bfseries Pile}}\label{pile_8h_a5db05bfbcfc748953d86ad9d12c9e82c}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{pile_8h_a880957c5fd2c5a21614a9b881fb3722e}{vide\-Pile} (\hyperlink{struct___pile}{Pile} $\ast$positions\-Pile)
+\begin{DoxyCompactList}\small\item\em permet de savoir si la pile est vide \end{DoxyCompactList}\item 
+void \hyperlink{pile_8h_a604e15d3245fa3f8f016e2d2a1610b51}{empiler} (\hyperlink{struct___pile}{Pile} $\ast$positions\-Pile, \hyperlink{struct___element_file}{Element\-File} b)
+\begin{DoxyCompactList}\small\item\em permet d'empiler un élément sur la pile \end{DoxyCompactList}\item 
+\hyperlink{struct___element_file}{Element\-File} \hyperlink{pile_8h_a494bec6622cafcffe8937a7b4fba3f18}{depiler} (\hyperlink{struct___pile}{Pile} $\ast$positions\-Pile)
+\begin{DoxyCompactList}\small\item\em permet de défiler un élément de la pile \end{DoxyCompactList}\item 
+\hyperlink{struct___pile}{Pile} $\ast$ \hyperlink{pile_8h_a8729158ffc4eee604e81c0f8bba3b8e5}{creer\-Pile} ()
+\begin{DoxyCompactList}\small\item\em Permet de créer la pile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{pile_8h_a8729158ffc4eee604e81c0f8bba3b8e5}{\index{pile.\-h@{pile.\-h}!creer\-Pile@{creer\-Pile}}
+\index{creer\-Pile@{creer\-Pile}!pile.h@{pile.\-h}}
+\subsubsection[{creer\-Pile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pile} $\ast$ creer\-Pile (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{pile_8h_a8729158ffc4eee604e81c0f8bba3b8e5}
+
+
+Permet de créer la pile. 
+
+\begin{DoxyReturn}{Returns}
+la pile 
+\end{DoxyReturn}
+\hypertarget{pile_8h_a494bec6622cafcffe8937a7b4fba3f18}{\index{pile.\-h@{pile.\-h}!depiler@{depiler}}
+\index{depiler@{depiler}!pile.h@{pile.\-h}}
+\subsubsection[{depiler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\-File} depiler (
+\begin{DoxyParamCaption}
+\item[{{\bf Pile} $\ast$}]{positions\-Pile}
+\end{DoxyParamCaption}
+)}}\label{pile_8h_a494bec6622cafcffe8937a7b4fba3f18}
+
+
+permet de défiler un élément de la pile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em La} & pile \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l'élément dépilé 
+\end{DoxyReturn}
+\hypertarget{pile_8h_a604e15d3245fa3f8f016e2d2a1610b51}{\index{pile.\-h@{pile.\-h}!empiler@{empiler}}
+\index{empiler@{empiler}!pile.h@{pile.\-h}}
+\subsubsection[{empiler}]{\setlength{\rightskip}{0pt plus 5cm}void empiler (
+\begin{DoxyParamCaption}
+\item[{{\bf Pile} $\ast$}]{positions\-Pile, }
+\item[{{\bf Element\-File}}]{b}
+\end{DoxyParamCaption}
+)}}\label{pile_8h_a604e15d3245fa3f8f016e2d2a1610b51}
+
+
+permet d'empiler un élément sur la pile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em la} & pile et l'élemnt à empiler \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{pile_8h_a880957c5fd2c5a21614a9b881fb3722e}{\index{pile.\-h@{pile.\-h}!vide\-Pile@{vide\-Pile}}
+\index{vide\-Pile@{vide\-Pile}!pile.h@{pile.\-h}}
+\subsubsection[{vide\-Pile}]{\setlength{\rightskip}{0pt plus 5cm}int vide\-Pile (
+\begin{DoxyParamCaption}
+\item[{{\bf Pile} $\ast$}]{positions\-Pile}
+\end{DoxyParamCaption}
+)}}\label{pile_8h_a880957c5fd2c5a21614a9b881fb3722e}
+
+
+permet de savoir si la pile est vide 
+
+
+\begin{DoxyParams}{Parameters}
+{\em La} & pile \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si vide 0 sinon 
+\end{DoxyReturn}
