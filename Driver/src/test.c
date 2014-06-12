@@ -19,9 +19,9 @@ int main(int argc, char** argv){
 	short nombreArrivees=0;
 	char c;
 	int nbBoost = NBBOOST;
-//	int carburant=0	;
+	int carburant=0	;
 
-	fscanf(stdin,"%hd %hd",&carte.tx,&carte.ty/*,&carburant*/);
+	fscanf(stdin,"%hd %hd %d",&carte.tx,&carte.ty,&carburant);
 
 	fprintf(info,"taille %d x %d\n\n", carte.tx, carte.ty);
 	int **tab=(int **)malloc(sizeof(int *)*carte.ty);
