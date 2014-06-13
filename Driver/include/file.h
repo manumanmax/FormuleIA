@@ -18,7 +18,6 @@ typedef struct _File
 {
 	CelluleF *head;
 	CelluleF *tail;
-	int taille;
 
 
 }FileF;
