@@ -1,0 +1,271 @@
+\hypertarget{path_8h}{\section{include/path.h File Reference}
+\label{path_8h}\index{include/path.\-h@{include/path.\-h}}
+}
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}../include/pile.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}vitesse.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}action.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}position.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}element\-File.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}act.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../include/file.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___circuit}{\-\_\-\-Circuit}
+\item 
+struct \hyperlink{struct___carte}{\-\_\-\-Carte}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{path_8h_a392fb874e547e582e9c66a08a1f23326}{\#define {\bfseries M\-A\-X}~200}\label{path_8h_a392fb874e547e582e9c66a08a1f23326}
+
+\item 
+\hypertarget{path_8h_a5b5cba0b0b9b73eb1ce8afda91fe7be7}{\#define {\bfseries R\-O\-U\-T\-E}~25}\label{path_8h_a5b5cba0b0b9b73eb1ce8afda91fe7be7}
+
+\item 
+\hypertarget{path_8h_ab83ae9a4c2ef10fadfc4e9ea51b67822}{\#define {\bfseries S\-A\-N\-D}~1}\label{path_8h_ab83ae9a4c2ef10fadfc4e9ea51b67822}
+
+\item 
+\hypertarget{path_8h_a88fc4150c6e64b37c2a9cfc0056c9bb2}{\#define {\bfseries S\-I\-Z\-E\-B\-O\-O\-S\-T}~25}\label{path_8h_a88fc4150c6e64b37c2a9cfc0056c9bb2}
+
+\item 
+\hypertarget{path_8h_a9c1ba26f53332815c424b4837293c54e}{\#define {\bfseries N\-B\-B\-O\-O\-S\-T}~2}\label{path_8h_a9c1ba26f53332815c424b4837293c54e}
+
+\item 
+\hypertarget{path_8h_ada480f712b81515fcc3466cd4b49c8ab}{\#define {\bfseries S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E}~5}\label{path_8h_ada480f712b81515fcc3466cd4b49c8ab}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{path_8h_a999268013c5faf8f07c75f2018094f8c}{typedef struct \hyperlink{struct___circuit}{\-\_\-\-Circuit} {\bfseries Circuit}}\label{path_8h_a999268013c5faf8f07c75f2018094f8c}
+
+\item 
+\hypertarget{path_8h_a0c3b4531664205432c6df9db656e1fe5}{typedef struct \hyperlink{struct___carte}{\-\_\-\-Carte} {\bfseries Carte}}\label{path_8h_a0c3b4531664205432c6df9db656e1fe5}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{path_8h_a238812ab6212833cdb1a8c3bd034d483}{autour\-Position} (\hyperlink{struct___position}{Position} current, \hyperlink{struct___action}{Vitesse} vit, \hyperlink{struct___carte}{Carte} $\ast$carte, int boost, \hyperlink{struct___position}{Position} autour\mbox{[}S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}\mbox{[}S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}, int valeur\mbox{[}S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}\mbox{[}S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]})
+\begin{DoxyCompactList}\small\item\em Permet de savoir ce qui se situe autour de la voiture. \end{DoxyCompactList}\item 
+int \hyperlink{path_8h_a5b3c0f721ccfdea26ed8e5dbbedb0d6c}{short\-Cut\-F} (\hyperlink{struct___circuit}{Circuit} pilote, \hyperlink{struct___carte}{Carte} carte, \hyperlink{struct___position}{Position} depart, \hyperlink{struct___action}{Vitesse} v\-Depart, \hyperlink{struct___action}{Action} $\ast$action, int $\ast$nb\-Boost)
+\begin{DoxyCompactList}\small\item\em Permet de calculer le meilleur chemin. \end{DoxyCompactList}\item 
+int \hyperlink{path_8h_a8a426dfea4c1bea06e8aa5869f70952f}{retrouver\-Chemin} (\hyperlink{struct___pile}{Pile} $\ast$pile\-Back\-Up, \hyperlink{struct___action}{Action} $\ast$action, int gen, int taille)
+\begin{DoxyCompactList}\small\item\em Permet de retourner le chemin dans le bon ordre. \end{DoxyCompactList}\item 
+int \hyperlink{path_8h_a394d9a4eb8c8cf56e67333b9fdd8c6ed}{is\-Arrived} (\hyperlink{struct___position}{Position} $\ast$pos\-Arrived, short $\ast$already\-Arrived, int $\ast$$\ast$map, \hyperlink{struct___position}{Position} pilot1, \hyperlink{struct___position}{Position} pilot2, int taille)
+\begin{DoxyCompactList}\small\item\em Permet de savoir si une voiture est arrivée à l'arrivée et de prévenir le pilote qu'il devra recalculer le chemin possible. \end{DoxyCompactList}\item 
+void \hyperlink{path_8h_ad229ffe4cc28403fc15c0d9e234982bc}{destruction} (char $\ast$$\ast$$\ast$$\ast$tab, int tx, int ty)
+\begin{DoxyCompactList}\small\item\em Permet de détruire un tableau de $\ast$$\ast$$\ast$char. \end{DoxyCompactList}\item 
+char \hyperlink{path_8h_a88ce8b7688329606990076b03e336163}{opti} (\hyperlink{struct___action}{Vitesse} v)
+\begin{DoxyCompactList}\small\item\em Fonction d'optimisation qui permet de regrouper deux char dans le même char (Non utilisée) \end{DoxyCompactList}\item 
+int \hyperlink{path_8h_a0f6fbca7eb7fe38004a6bfeca9a12dac}{is\-Possible} (\hyperlink{struct___position}{Position} current, \hyperlink{struct___action}{Vitesse} v\-Current, \hyperlink{struct___carte}{Carte} $\ast$carte, int boost)
+\begin{DoxyCompactList}\small\item\em Permet de savoir si le calcul de parcours est possible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{path_8h_a238812ab6212833cdb1a8c3bd034d483}{\index{path.\-h@{path.\-h}!autour\-Position@{autour\-Position}}
+\index{autour\-Position@{autour\-Position}!path.h@{path.\-h}}
+\subsubsection[{autour\-Position}]{\setlength{\rightskip}{0pt plus 5cm}int autour\-Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Position}}]{current, }
+\item[{{\bf Vitesse}}]{vit, }
+\item[{{\bf Carte} $\ast$}]{carte, }
+\item[{int}]{boost, }
+\item[{{\bf Position}}]{autour\mbox{[}\-S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}\mbox{[}\-S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}, }
+\item[{int}]{valeur\mbox{[}\-S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}\mbox{[}\-S\-I\-Z\-E\-B\-I\-D\-I\-M\-T\-A\-B\-L\-E\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a238812ab6212833cdb1a8c3bd034d483}
+
+
+Permet de savoir ce qui se situe autour de la voiture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em La} & position courrante \\
+\hline
+{\em La} & vitesse en cours \\
+\hline
+{\em La} & carte \\
+\hline
+{\em Si} & on utilise un boost \\
+\hline
+{\em Le} & tableau qui sera rempli \\
+\hline
+{\em Le} & tableau de poids \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si il existe une valeur atteignable par la voiture, ou 0 sinon 
+\end{DoxyReturn}
+\hypertarget{path_8h_ad229ffe4cc28403fc15c0d9e234982bc}{\index{path.\-h@{path.\-h}!destruction@{destruction}}
+\index{destruction@{destruction}!path.h@{path.\-h}}
+\subsubsection[{destruction}]{\setlength{\rightskip}{0pt plus 5cm}void destruction (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$$\ast$$\ast$}]{tab, }
+\item[{int}]{tx, }
+\item[{int}]{ty}
+\end{DoxyParamCaption}
+)}}\label{path_8h_ad229ffe4cc28403fc15c0d9e234982bc}
+
+
+Permet de détruire un tableau de $\ast$$\ast$$\ast$char. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Le} & tableau à détruire \\
+\hline
+{\em La} & taille du tableau en x \\
+\hline
+{\em La} & taille du tableau en y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{path_8h_a394d9a4eb8c8cf56e67333b9fdd8c6ed}{\index{path.\-h@{path.\-h}!is\-Arrived@{is\-Arrived}}
+\index{is\-Arrived@{is\-Arrived}!path.h@{path.\-h}}
+\subsubsection[{is\-Arrived}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Arrived (
+\begin{DoxyParamCaption}
+\item[{{\bf Position} $\ast$}]{pos\-Arrived, }
+\item[{short $\ast$}]{already\-Arrived, }
+\item[{int $\ast$$\ast$}]{map, }
+\item[{{\bf Position}}]{pilot1, }
+\item[{{\bf Position}}]{pilot2, }
+\item[{int}]{taille}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a394d9a4eb8c8cf56e67333b9fdd8c6ed}
+
+
+Permet de savoir si une voiture est arrivée à l'arrivée et de prévenir le pilote qu'il devra recalculer le chemin possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Un} & tableau contenant toutes les différentes arrivées \\
+\hline
+{\em un} & tableau qui dit si on a déjà été prévenu \\
+\hline
+{\em la} & carte \\
+\hline
+{\em La} & position du pilote 1 \\
+\hline
+{\em La} & position du pilote 2 \\
+\hline
+{\em La} & taille du tableau d'arrivées \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si une nouvelle arrivée est détectée 
+\end{DoxyReturn}
+\hypertarget{path_8h_a0f6fbca7eb7fe38004a6bfeca9a12dac}{\index{path.\-h@{path.\-h}!is\-Possible@{is\-Possible}}
+\index{is\-Possible@{is\-Possible}!path.h@{path.\-h}}
+\subsubsection[{is\-Possible}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Possible (
+\begin{DoxyParamCaption}
+\item[{{\bf Position}}]{current, }
+\item[{{\bf Vitesse}}]{v\-Current, }
+\item[{{\bf Carte} $\ast$}]{carte, }
+\item[{int}]{boost}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a0f6fbca7eb7fe38004a6bfeca9a12dac}
+
+
+Permet de savoir si le calcul de parcours est possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em La} & position courante \\
+\hline
+{\em La} & vitesse courante \\
+\hline
+{\em La} & carte \\
+\hline
+{\em 1} & si on utilise un boost, ou 0 sinon \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si possible, 0 sinon 
+\end{DoxyReturn}
+\hypertarget{path_8h_a88ce8b7688329606990076b03e336163}{\index{path.\-h@{path.\-h}!opti@{opti}}
+\index{opti@{opti}!path.h@{path.\-h}}
+\subsubsection[{opti}]{\setlength{\rightskip}{0pt plus 5cm}char opti (
+\begin{DoxyParamCaption}
+\item[{{\bf Vitesse}}]{v}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a88ce8b7688329606990076b03e336163}
+
+
+Fonction d'optimisation qui permet de regrouper deux char dans le même char (Non utilisée) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Vitesse} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le char contenant deux valeurs 
+\end{DoxyReturn}
+\hypertarget{path_8h_a8a426dfea4c1bea06e8aa5869f70952f}{\index{path.\-h@{path.\-h}!retrouver\-Chemin@{retrouver\-Chemin}}
+\index{retrouver\-Chemin@{retrouver\-Chemin}!path.h@{path.\-h}}
+\subsubsection[{retrouver\-Chemin}]{\setlength{\rightskip}{0pt plus 5cm}int retrouver\-Chemin (
+\begin{DoxyParamCaption}
+\item[{{\bf Pile} $\ast$}]{pile\-Back\-Up, }
+\item[{{\bf Action} $\ast$}]{action, }
+\item[{int}]{gen, }
+\item[{int}]{taille}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a8a426dfea4c1bea06e8aa5869f70952f}
+
+
+Permet de retourner le chemin dans le bon ordre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em La} & pile sera mise dans l'ordre \\
+\hline
+{\em Le} & tableau qui sera rempli \\
+\hline
+{\em Le} & numéro de la dernière génération de cellule \\
+\hline
+{\em La} & taille du tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la taille du tableau 
+\end{DoxyReturn}
+\hypertarget{path_8h_a5b3c0f721ccfdea26ed8e5dbbedb0d6c}{\index{path.\-h@{path.\-h}!short\-Cut\-F@{short\-Cut\-F}}
+\index{short\-Cut\-F@{short\-Cut\-F}!path.h@{path.\-h}}
+\subsubsection[{short\-Cut\-F}]{\setlength{\rightskip}{0pt plus 5cm}int short\-Cut\-F (
+\begin{DoxyParamCaption}
+\item[{{\bf Circuit}}]{pilote, }
+\item[{{\bf Carte}}]{carte, }
+\item[{{\bf Position}}]{depart, }
+\item[{{\bf Vitesse}}]{v\-Depart, }
+\item[{{\bf Action} $\ast$}]{action, }
+\item[{int $\ast$}]{nb\-Boost}
+\end{DoxyParamCaption}
+)}}\label{path_8h_a5b3c0f721ccfdea26ed8e5dbbedb0d6c}
+
+
+Permet de calculer le meilleur chemin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Le} & pilote \\
+\hline
+{\em La} & carte \\
+\hline
+{\em La} & position de départ \\
+\hline
+{\em La} & vitesse de départ \\
+\hline
+{\em Le} & tableau d'action qui sera rempli \\
+\hline
+{\em Le} & nombre de boosts \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le nombre d'accélérations à faire 
+\end{DoxyReturn}

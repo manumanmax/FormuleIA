@@ -1,0 +1,127 @@
+\hypertarget{file_8h}{\section{include/file.h File Reference}
+\label{file_8h}\index{include/file.\-h@{include/file.\-h}}
+}
+{\ttfamily \#include \char`\"{}element\-File.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___cellule}{\-\_\-\-Cellule}
+\item 
+struct \hyperlink{struct___file}{\-\_\-\-File}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{file_8h_a7912326592b9ac721361c940fce165d9}{typedef struct \hyperlink{struct___cellule}{\-\_\-\-Cellule} {\bfseries Cellule\-F}}\label{file_8h_a7912326592b9ac721361c940fce165d9}
+
+\item 
+\hypertarget{file_8h_a173007aa95b86e0125d1c3db06154a68}{typedef struct \hyperlink{struct___file}{\-\_\-\-File} {\bfseries File\-F}}\label{file_8h_a173007aa95b86e0125d1c3db06154a68}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct___file}{File\-F} $\ast$ \hyperlink{file_8h_ae79dc15e3c254f9ac80ad2cbeeabbf31}{creer\-File\-F} ()
+\begin{DoxyCompactList}\small\item\em permet de créer la file \end{DoxyCompactList}\item 
+void \hyperlink{file_8h_addcd4dc47dffc32f32db338cb17b4069}{detruire\-File\-F} (\hyperlink{struct___file}{File\-F} $\ast$file)
+\begin{DoxyCompactList}\small\item\em permet de détruire la file \end{DoxyCompactList}\item 
+int \hyperlink{file_8h_a5eede9cb58ba6a67c841454846ef39ff}{vide\-File\-F} (\hyperlink{struct___file}{File\-F} $\ast$f)
+\begin{DoxyCompactList}\small\item\em permet de savoir si une file est vide \end{DoxyCompactList}\item 
+void \hyperlink{file_8h_aa2ddd9d34d2e721e6c5f023e6e5395ae}{enfiler\-F} (\hyperlink{struct___file}{File\-F} $\ast$f, \hyperlink{struct___element_file}{Element\-File} val)
+\begin{DoxyCompactList}\small\item\em permet d'enfiler un élément dans la file \end{DoxyCompactList}\item 
+\hyperlink{struct___element_file}{Element\-File} \hyperlink{file_8h_ae15c348744cbd3757d398592da01e0b0}{defiler\-F} (\hyperlink{struct___file}{File\-F} $\ast$f)
+\begin{DoxyCompactList}\small\item\em Permet de défiler un élément de la file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{file_8h_ae79dc15e3c254f9ac80ad2cbeeabbf31}{\index{file.\-h@{file.\-h}!creer\-File\-F@{creer\-File\-F}}
+\index{creer\-File\-F@{creer\-File\-F}!file.h@{file.\-h}}
+\subsubsection[{creer\-File\-F}]{\setlength{\rightskip}{0pt plus 5cm}{\bf File\-F} $\ast$ creer\-File\-F (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{file_8h_ae79dc15e3c254f9ac80ad2cbeeabbf31}
+
+
+permet de créer la file 
+
+\begin{DoxyReturn}{Returns}
+la file 
+\end{DoxyReturn}
+\hypertarget{file_8h_ae15c348744cbd3757d398592da01e0b0}{\index{file.\-h@{file.\-h}!defiler\-F@{defiler\-F}}
+\index{defiler\-F@{defiler\-F}!file.h@{file.\-h}}
+\subsubsection[{defiler\-F}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\-File} defiler\-F (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-F} $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{file_8h_ae15c348744cbd3757d398592da01e0b0}
+
+
+Permet de défiler un élément de la file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em la} & file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l'élément défilé 
+\end{DoxyReturn}
+\hypertarget{file_8h_addcd4dc47dffc32f32db338cb17b4069}{\index{file.\-h@{file.\-h}!detruire\-File\-F@{detruire\-File\-F}}
+\index{detruire\-File\-F@{detruire\-File\-F}!file.h@{file.\-h}}
+\subsubsection[{detruire\-File\-F}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\-File\-F (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-F} $\ast$}]{file}
+\end{DoxyParamCaption}
+)}}\label{file_8h_addcd4dc47dffc32f32db338cb17b4069}
+
+
+permet de détruire la file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em la} & file à détruire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{file_8h_aa2ddd9d34d2e721e6c5f023e6e5395ae}{\index{file.\-h@{file.\-h}!enfiler\-F@{enfiler\-F}}
+\index{enfiler\-F@{enfiler\-F}!file.h@{file.\-h}}
+\subsubsection[{enfiler\-F}]{\setlength{\rightskip}{0pt plus 5cm}void enfiler\-F (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-F} $\ast$}]{f, }
+\item[{{\bf Element\-File}}]{val}
+\end{DoxyParamCaption}
+)}}\label{file_8h_aa2ddd9d34d2e721e6c5f023e6e5395ae}
+
+
+permet d'enfiler un élément dans la file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em la} & file et l'élément à enfiler \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{file_8h_a5eede9cb58ba6a67c841454846ef39ff}{\index{file.\-h@{file.\-h}!vide\-File\-F@{vide\-File\-F}}
+\index{vide\-File\-F@{vide\-File\-F}!file.h@{file.\-h}}
+\subsubsection[{vide\-File\-F}]{\setlength{\rightskip}{0pt plus 5cm}int vide\-File\-F (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-F} $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{file_8h_a5eede9cb58ba6a67c841454846ef39ff}
+
+
+permet de savoir si une file est vide 
+
+
+\begin{DoxyParams}{Parameters}
+{\em la} & file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si vide, 0 sinon 
+\end{DoxyReturn}

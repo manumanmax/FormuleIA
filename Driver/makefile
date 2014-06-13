@@ -10,7 +10,7 @@ all: fatMobile
 
 testManu: $(MANUBIN)fatMobile
 
-fatMobile: $(BIN)test.o $(BIN)fonction.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
+fatMobile: $(BIN)test.o $(BIN)path.o $(BIN)pile.o $(BIN)fi.o $(BIN)communication.o
 	$(CC) -o $@ $^ 
 
 $(MANUBIN)fatMobile: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o $(BIN)communication.o
@@ -19,7 +19,7 @@ $(MANUBIN)fatMobile: $(BIN)test.o $(BIN)pile.o $(BIN)fi.o $(BIN)fonction.o $(BIN
 $(BIN)test.o: $(SRC)test.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
-$(BIN)fonction.o: $(SRC)fonction.c
+$(BIN)path.o: $(SRC)path.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 $(BIN)pile.o: $(SRC)pile.c

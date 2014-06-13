@@ -1,0 +1,12 @@
+#ifndef ACT_H
+#define ACT_H
+
+typedef struct _Act
+{
+	Action action;
+	int position;
+	Position preced;
+}Act;
+
+
+#endif
