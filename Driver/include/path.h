@@ -8,7 +8,7 @@
 #define ROUTE 25
 #define SAND 1
 #define SIZEBOOST 25
-#define NBBOOST 2
+#define NBBOOST 5
 #define SIZEBIDIMTABLE 5
 
 #include <stdlib.h>
